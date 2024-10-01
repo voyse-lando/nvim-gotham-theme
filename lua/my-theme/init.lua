@@ -1,4 +1,5 @@
 local colors = require("my-theme.colors")
+local termcolors = require("my-theme.terminal-colors")
 local config = require("my-theme.config")
 local utils = require("my-theme.utils")
 local bufferline = require("my-theme.integrations.bufferline")
@@ -6,24 +7,24 @@ local cmp = require("my-theme.integrations.cmp")
 local theme = {}
 
 local function set_terminal_colors()
-	vim.g.terminal_color_0 = colors.bg
-	vim.g.terminal_color_1 = colors.red
-	vim.g.terminal_color_2 = colors.green
-	vim.g.terminal_color_3 = colors.yellowDark
-	vim.g.terminal_color_4 = colors.blue
-	vim.g.terminal_color_5 = colors.purple
-	vim.g.terminal_color_6 = colors.blueLight
-	vim.g.terminal_color_7 = colors.fg
-	vim.g.terminal_color_8 = colors.fgInactive
-	vim.g.terminal_color_9 = colors.redDark
-	vim.g.terminal_color_10 = colors.orangeLight
-	vim.g.terminal_color_11 = colors.orange
-	vim.g.terminal_color_12 = colors.symbol
-	vim.g.terminal_color_13 = colors.red
-	vim.g.terminal_color_14 = colors.orangeLight
-	vim.g.terminal_color_15 = colors.comment
-	vim.g.terminal_color_background = colors.bg
-	vim.g.terminal_color_foreground = colors.fg
+	vim.g.terminal_color_0 = termcolors.color_0
+	vim.g.terminal_color_1 = termcolors.color_1
+	vim.g.terminal_color_2 = termcolors.color_2
+	vim.g.terminal_color_3 = termcolors.color_3
+	vim.g.terminal_color_4 = termcolors.color_4
+	vim.g.terminal_color_5 = termcolors.color_5
+	vim.g.terminal_color_6 = termcolors.color_6
+	vim.g.terminal_color_7 = termcolors.color_7
+	vim.g.terminal_color_8 = termcolors.color_8
+	vim.g.terminal_color_9 = termcolors.color_9
+	vim.g.terminal_color_10 = termcolors.color_10
+	vim.g.terminal_color_11 = termcolors.color_11
+	vim.g.terminal_color_12 = termcolors.color_12
+	vim.g.terminal_color_13 = termcolors.color_13
+	vim.g.terminal_color_14 = termcolors.color_14
+	vim.g.terminal_color_15 = termcolors.color_15
+	vim.g.terminal_color_background = termcolors.bg
+	vim.g.terminal_color_foreground = termcolors.fg
 end
 
 local function set_groups()
@@ -31,7 +32,7 @@ local function set_groups()
 	local diff_add = utils.shade(colors.green, 0.5, colors.bg)
 	local diff_delete = utils.shade(colors.red, 0.5, colors.bg)
 	local diff_change = utils.shade(colors.blue, 0.5, colors.bg)
-	local diff_text = utils.shade(colors.yellowDark, 0.5, colors.bg)
+	local diff_text = utils.shade(colors.yellow, 0.5, colors.bg)
 
 	local groups = {
 		-- base
@@ -52,7 +53,7 @@ local function set_groups()
 		EndOfBuffer = { fg = colors.purple },
 		TermCursor = { link = "Cursor" },
 		TermCursorNC = { link = "Cursor" },
-		ErrorMsg = { fg = colors.red },
+		ErrorMsg = { fg = colors.redLight },
 		VertSplit = { fg = colors.border, bg = bg },
 		Winseparator = { link = "VertSplit" },
 		SignColumn = { link = "Normal" },
@@ -60,7 +61,7 @@ local function set_groups()
 		FoldColumn = { link = "SignColumn" },
 		IncSearch = { bg = utils.mix(colors.blue, colors.bg, math.abs(0.30)), fg = colors.bg },
 		Substitute = { link = "IncSearch" },
-		CursorLineNr = { fg = colors.comment },
+		CursorLineNr = { fg = colors.fgCommand },
 		MatchParen = { fg = colors.red, bg = bg },
 		ModeMsg = { link = "Normal" },
 		MsgArea = { link = "Normal" },
@@ -94,34 +95,34 @@ local function set_groups()
 		WildMenu = { bg = colors.bgOption },
 		Comment = { fg = colors.comment, italic = config.italics.comments or false },
 
-		Constant = { fg = colors.red },
-		String = { fg = colors.orangeLight, italic = config.italics.strings or false },
-		Character = { fg = colors.orangeLight },
-		Number = { fg = colors.primary, bold = true },
-		Boolean = { fg = colors.blue },
+		Constant = { fg = colors.purple },
+		String = { fg = colors.red, italic = config.italics.strings or false },
+		Character = { fg = colors.red },
+		Number = { fg = colors.cyanLight, bold = true },
+		Boolean = { fg = colors.blueLight },
 		Float = { link = "Number" },
 
 		Identifier = { fg = colors.fg },
-		Function = { fg = colors.purple },
-		Method = { fg = colors.purple },
-		Property = { fg = colors.blue },
+		Function = { fg = colors.yellow },
+		Method = { fg = colors.yellow },
+		Property = { fg = colors.yellow },
 		Field = { link = "Property" },
 		Parameter = { fg = colors.fg },
-		Statement = { fg = colors.red },
-		Conditional = { fg = colors.red },
+		Statement = { fg = colors.cyan },
+		Conditional = { fg = colors.cyan },
 		-- Repeat = {},
-		Label = { fg = colors.blue },
-		Operator = { fg = colors.red },
+		Label = { fg = colors.yellow },
+		Operator = { fg = colors.cyan },
 		Keyword = { link = "Statement", italic = config.italics.keywords or false },
-		Exception = { fg = colors.red },
+		Exception = { fg = colors.redLight },
 
 		PreProc = { link = "Keyword" },
 		-- Include = {},
-		Define = { fg = colors.purple },
+		Define = { fg = colors.yellow },
 		Macro = { link = "Define" },
-		PreCondit = { fg = colors.red },
+		PreCondit = { fg = colors.cyan },
 
-		Type = { fg = colors.purple },
+		Type = { fg = colors.yellow },
 		Struct = { link = "Type" },
 		Class = { link = "Type" },
 
@@ -130,21 +131,21 @@ local function set_groups()
 		-- Typedef = {},
 
 		Attribute = { link = "Character" },
-		Punctuation = { fg = colors.symbol },
-		Special = { fg = colors.symbol },
+		Punctuation = { fg = colors.fg },
+		Special = { fg = colors.fg },
 
-		SpecialChar = { fg = colors.red },
-		Tag = { fg = colors.orangeLight },
-		Delimiter = { fg = colors.symbol },
+		SpecialChar = { fg = colors.purple },
+		Tag = { fg = colors.yellowLight },
+		Delimiter = { fg = colors.fg },
 		-- SpecialComment = {},
-		Debug = { fg = colors.purpleDark },
+		Debug = { fg = colors.purpleLight },
 
 		Underlined = { underline = true },
 		Bold = { bold = true },
 		Italic = { italic = true },
 		Ignore = { fg = colors.bg },
 		Error = { link = "ErrorMsg" },
-		Todo = { fg = colors.orange, bold = true },
+		Todo = { fg = colors.redLight, bold = true },
 
 		-- LspReferenceText = {},
 		-- LspReferenceRead = {},
@@ -155,8 +156,8 @@ local function set_groups()
 
 		DiagnosticError = { link = "Error" },
 		DiagnosticWarn = { link = "WarningMsg" },
-		DiagnosticInfo = { fg = colors.blue },
-		DiagnosticHint = { fg = colors.yellowDark },
+		DiagnosticInfo = { fg = colors.cyan },
+		DiagnosticHint = { fg = colors.blueLight },
 		DiagnosticVirtualTextError = { link = "DiagnosticError" },
 		DiagnosticVirtualTextWarn = { link = "DiagnosticWarn" },
 		DiagnosticVirtualTextInfo = { link = "DiagnosticInfo" },
@@ -194,16 +195,16 @@ local function set_groups()
 		["@texcolors.title"] = { link = "Keyword" },
 		["@texcolors.uri"] = { fg = colors.blue, sp = colors.blue, underline = true },
 		["@texcolors.underline"] = { link = "Underlined" },
-		["@symbol"] = { fg = colors.symbol },
+		["@symbol"] = { fg = colors.fg },
 		["@texcolors.todo"] = { link = "Todo" },
 		["@comment"] = { link = "Comment" },
 		["@punctuation"] = { link = "Punctuation" },
-		["@punctuation.bracket"] = { fg = colors.yellowDark },
+		["@punctuation.bracket"] = { fg = colors.cyanLight },
 		["@punctuation.delimiter"] = { link = "Delimiter" },
-		["@punctuation.separator.keyvalue"] = { fg = colors.red },
+		["@punctuation.separator.keyvalue"] = { fg = colors.cyanLight },
 
 		["@texcolors.diff.add"] = { fg = colors.green },
-		["@texcolors.diff.delete"] = { fg = colors.redDark },
+		["@texcolors.diff.delete"] = { fg = colors.red },
 
 		["@constant"] = { link = "Constant" },
 		["@constancolors.builtin"] = { link = "Keyword" },
@@ -211,7 +212,7 @@ local function set_groups()
 		-- ["@define"] = {},
 		-- ["@macro"] = {},
 		["@string"] = { link = "String" },
-		["@string.escape"] = { fg = utils.shade(colors.orangeLight, 0.45) },
+		["@string.escape"] = { fg = utils.shade(colors.yellowLight, 0.45) },
 		["@string.special"] = { fg = utils.shade(colors.blue, 0.45) },
 		-- ["@character"] = {},
 		-- ["@character.special"] = {},
@@ -226,7 +227,7 @@ local function set_groups()
 		["@method"] = { link = "Function" },
 		["@field"] = { link = "Property" },
 		["@property"] = { link = "Property" },
-		["@constructor"] = { fg = colors.blue },
+		["@constructor"] = { fg = colors.yellow },
 		-- ["@conditional"] = {},
 		-- ["@repeat"] = {},
 		["@label"] = { link = "Label" },
@@ -236,8 +237,8 @@ local function set_groups()
 		["@variable.builtin"] = { fg = colors.fg, italic = config.italics.variables or false },
 		["@type"] = { link = "Type" },
 		["@type.definition"] = { fg = colors.fg },
-		["@type.builtin"] = { fg = colors.blue },
-		["@type.qualifier"] = { fg = colors.blue },
+		["@type.builtin"] = { fg = colors.yellow },
+		["@type.qualifier"] = { fg = colors.yellow },
 		["@keyword"] = { link = "Keyword" },
 		-- ["@storageclass"] = {},
 		-- ["@structure"] = {},
@@ -245,9 +246,9 @@ local function set_groups()
 		["@annotation"] = { link = "Label" },
 		-- ["@include"] = {},
 		-- ["@preproc"] = {},
-		["@debug"] = { fg = colors.purpleDark },
+		["@debug"] = { fg = colors.purple },
 		["@tag"] = { link = "Tag" },
-		["@tag.delimiter"] = { fg = colors.symbol },
+		["@tag.delimiter"] = { fg = colors.fg },
 		["@tag.attribute"] = { fg = colors.purple },
 		["@attribute"] = { link = "Attribute" },
 		["@error"] = { link = "Error" },
@@ -256,7 +257,7 @@ local function set_groups()
 
 		-- Specific languages
 		-- overrides
-		["@label.json"] = { fg = colors.property }, -- For json
+		["@label.json"] = { fg = colors.fg }, -- For json
 		["@label.help"] = { link = "@texcolors.uri" }, -- For help files
 		["@texcolors.uri.html"] = { underline = true }, -- For html
 
@@ -278,10 +279,10 @@ local function set_groups()
 		["@lsp.typemod.function.readonly"] = { link = "@function" },
 	}
 
-  -- integrations
-  groups = vim.tbl_extend("force", groups, cmp.highlights())
+	-- integrations
+	groups = vim.tbl_extend("force", groups, cmp.highlights())
 
-  -- overrides
+	-- overrides
 	groups =
 		vim.tbl_extend("force", groups, type(config.overrides) == "function" and config.overrides() or config.overrides)
 
